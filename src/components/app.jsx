@@ -1,10 +1,13 @@
 import React from "react";
 import Welcome from "./welcome";
+import PropTypes from "prop-types";
 
-export default class App extends React.Component {
-  render() {
-    return (
-      <Welcome errors={3} />
-    );
-  }
-}
+const App = (props) => {
+  return <Welcome errors={props.errors} />;
+};
+
+App.propTypes = {
+  errors: PropTypes.number.isRequired
+};
+
+export default App;
