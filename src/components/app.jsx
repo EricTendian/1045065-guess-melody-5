@@ -8,6 +8,7 @@ import Result from "./result";
 import Lose from "./lose";
 import Artist from "./artist";
 import Genre from "./genre";
+import questions from "../mocks/questions";
 
 const App = (props) => {
   return <BrowserRouter>
@@ -25,10 +26,10 @@ const App = (props) => {
         <Lose />
       </Route>
       <Route exact path="/dev-artist">
-        <Artist />
+        <Artist question={questions[1]} />
       </Route>
       <Route exact path="/dev-genre">
-        <Genre />
+        <Genre question={questions[0]} />
       </Route>
     </Switch>
   </BrowserRouter>;

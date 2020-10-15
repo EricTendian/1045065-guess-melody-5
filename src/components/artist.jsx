@@ -1,11 +1,22 @@
 import React from "react";
+import PropTypes from "prop-types";
 
-const Artist = () => {
+const Artist = (props) => {
   const timerLineStyle = {
     filter: `url(#blur)`,
     transform: `rotate(-90deg) scaleY(-1)`,
     transformOrigin: `center`
   };
+
+  const answers = props.question.answers.map((answer, index) =>
+    <div className="artist" key={index}>
+      <input className="artist__input visually-hidden" type="radio" name="answer" value={`artist-` + index} id={`answer-` + index} />
+      <label className="artist__name" htmlFor={`answer-` + index}>
+        <img className="artist__picture" src={answer.picture} alt={answer.artist} />
+        {answer.artist}
+      </label>
+    </div>
+  );
 
   return <section className="game game--artist">
     <header className="game__header">
@@ -30,40 +41,34 @@ const Artist = () => {
       <h2 className="game__title">Кто исполняет эту песню?</h2>
       <div className="game__track">
         <div className="track">
-          <button className="track__button track__button--play" type="button"></button>
+          <button className="track__button track__button--play" type="button" />
           <div className="track__status">
-            <audio></audio>
+            <audio src={props.question.song.src} />
           </div>
         </div>
       </div>
 
       <form className="game__artist">
-        <div className="artist">
-          <input className="artist__input visually-hidden" type="radio" name="answer" value="artist-1" id="answer-1" />
-          <label className="artist__name" htmlFor="answer-1">
-            <img className="artist__picture" src="img/placeholder.jpg" alt="Пелагея" />
-              Пелагея
-          </label>
-        </div>
-
-        <div className="artist">
-          <input className="artist__input visually-hidden" type="radio" name="answer" value="artist-2" id="answer-2" />
-          <label className="artist__name" htmlFor="answer-2">
-            <img className="artist__picture" src="img/placeholder.jpg" alt="Пелагея" />
-              Краснознаменная дивизия имени моей бабушки
-          </label>
-        </div>
-
-        <div className="artist">
-          <input className="artist__input visually-hidden" type="radio" name="answer" value="artist-3" id="answer-3" />
-          <label className="artist__name" htmlFor="answer-3">
-            <img className="artist__picture" src="img/placeholder.jpg" alt="Пелагея" />
-              Lorde
-          </label>
-        </div>
+        {answers}
       </form>
     </section>
   </section>;
+};
+
+Artist.propTypes = {
+  question: PropTypes.shape({
+    type: PropTypes.oneOf([`artist`]).isRequired,
+    song: PropTypes.shape({
+      artist: PropTypes.string.isRequired,
+      src: PropTypes.string.isRequired,
+    }),
+    answers: PropTypes.arrayOf(
+        PropTypes.shape({
+          picture: PropTypes.string.isRequired,
+          artist: PropTypes.string.isRequired,
+        })
+    )
+  }).isRequired
 };
 
 export default Artist;
