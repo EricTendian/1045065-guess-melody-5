@@ -26,7 +26,15 @@ const App = (props) => {
         <Lose />
       </Route>
       <Route exact path="/dev-artist">
-        <Artist question={questions[1]} />
+        <Artist question={questions[1]} checkAnswer={(question, answer) => {
+          const correctAnswer = question.song.artist;
+          const userAnswerIndex = parseInt(answer.replace(`artist-`, ``), 10);
+          if (question.answers[userAnswerIndex] && question.answers[userAnswerIndex].artist === correctAnswer) {
+            alert(`Correct!`);
+          } else {
+            alert(`Incorrect!`);
+          }
+        }}/>
       </Route>
       <Route exact path="/dev-genre">
         <Genre question={questions[0]} checkAnswer={(question, answers) => {
