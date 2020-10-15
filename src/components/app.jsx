@@ -14,9 +14,9 @@ import questions from "../mocks/questions";
 const App = (props) => {
   return <BrowserRouter>
     <Switch>
-      <Route exact path="/">
-        <Welcome errors={props.errors} />
-      </Route>
+      <Route exact path="/" render={({history}) => (
+        <Welcome errors={props.errors} launchGame={() => history.push(`/game`)} />
+      )} />
       <Route exact path="/login">
         <Login />
       </Route>
