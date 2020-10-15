@@ -1,5 +1,5 @@
 import React from "react";
-import {BrowserRouter, Switch, Route} from "react-router-dom";
+import {BrowserRouter, Route, Switch} from "react-router-dom";
 import PropTypes from "prop-types";
 
 import Welcome from "./welcome";
@@ -8,6 +8,7 @@ import Result from "./result";
 import Lose from "./lose";
 import Artist from "./artist";
 import Genre from "./genre";
+import GameScreen from "./game-screen";
 import questions from "../mocks/questions";
 
 const App = (props) => {
@@ -18,6 +19,9 @@ const App = (props) => {
       </Route>
       <Route exact path="/login">
         <Login />
+      </Route>
+      <Route exact path="/game">
+        <GameScreen questions={props.questions} />
       </Route>
       <Route exact path="/result">
         <Result />
