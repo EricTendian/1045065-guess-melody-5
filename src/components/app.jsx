@@ -29,7 +29,17 @@ const App = (props) => {
         <Artist question={questions[1]} />
       </Route>
       <Route exact path="/dev-genre">
-        <Genre question={questions[0]} />
+        <Genre question={questions[0]} checkAnswer={(question, answers) => {
+          const correctAnswer = question.genre;
+          const totalAnswers = question.answers.length;
+          let numCorrect = 0;
+          for (let index = 0; index < question.answers.length; index++) {
+            if ((question.answers[index].genre === correctAnswer) === answers[index]) {
+              numCorrect++;
+            }
+          }
+          alert(`You got ${numCorrect} out of ${totalAnswers} correct`);
+        }} />
       </Route>
     </Switch>
   </BrowserRouter>;
