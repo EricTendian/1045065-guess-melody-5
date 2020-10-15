@@ -15,19 +15,19 @@ const App = (props) => {
       <Route exact path="/">
         <Welcome errors={props.errors} />
       </Route>
-      <Route path="/login">
+      <Route exact path="/login">
         <Login />
       </Route>
-      <Route path="/result">
+      <Route exact path="/result">
         <Result />
       </Route>
-      <Route path="/lose">
+      <Route exact path="/lose">
         <Lose />
       </Route>
-      <Route path="/dev-artist">
+      <Route exact path="/dev-artist">
         <Artist />
       </Route>
-      <Route path="/dev-genre">
+      <Route exact path="/dev-genre">
         <Genre />
       </Route>
     </Switch>
