@@ -42,11 +42,12 @@ const App = (props) => {
       </Route>
       <Route exact path="/dev-genre">
         <Genre question={questions[0]} checkAnswer={(question, answers) => {
-          const correctAnswer = question.genre;
+          const correctGenre = question.genre;
           const totalAnswers = question.answers.length;
           let numCorrect = 0;
           question.answers.forEach((possibleAnswer, index) => {
-            if ((possibleAnswer.genre === correctAnswer) === answers[index]) {
+            const correctAnswer = possibleAnswer.genre === correctGenre;
+            if (correctAnswer === answers[index]) {
               numCorrect++;
             }
           });
