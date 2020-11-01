@@ -45,11 +45,11 @@ const App = (props) => {
           const correctAnswer = question.genre;
           const totalAnswers = question.answers.length;
           let numCorrect = 0;
-          for (let index = 0; index < question.answers.length; index++) {
-            if ((question.answers[index].genre === correctAnswer) === answers[index]) {
+          question.answers.forEach((possibleAnswer, index) => {
+            if ((possibleAnswer.genre === correctAnswer) === answers[index]) {
               numCorrect++;
             }
-          }
+          });
           alert(`You got ${numCorrect} out of ${totalAnswers} correct`);
         }} />
       </Route>

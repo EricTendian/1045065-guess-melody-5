@@ -17,9 +17,9 @@ class GameScreen extends PureComponent {
   }
 
   render() {
-    const question = this.props.questions[this.state.currentQuestion];
+    if (this.state.currentQuestion < this.props.questions.length) {
+      const question = this.props.questions[this.state.currentQuestion];
 
-    if (typeof question === `object`) {
       if (question.type === GENRE_TYPE) {
         return <Genre checkAnswer={() => {
           this.setState({
@@ -35,12 +35,17 @@ class GameScreen extends PureComponent {
       }
     }
 
-    return <Redirect to="/" />;
+    return <Redirect to="/"/>;
   }
 }
 
 GameScreen.propTypes = {
-  questions: PropTypes.array.isRequired
+  questions: PropTypes.arrayOf(
+      PropTypes.shape({
+        type: PropTypes.oneOf([GENRE_TYPE, ARTIST_TYPE]).isRequired,
+        answers: PropTypes.arrayOf(PropTypes.object).isRequired
+      })
+  ).isRequired
 };
 
 export default GameScreen;
