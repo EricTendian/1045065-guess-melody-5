@@ -1,5 +1,6 @@
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
+import AudioPlayer from "./audio-player";
 
 class Genre extends PureComponent {
   constructor(props) {
@@ -38,10 +39,7 @@ class Genre extends PureComponent {
 
     const answers = this.props.question.answers.map((answer, index) =>
       <div className="track" key={index}>
-        <button className="track__button track__button--play" type="button"/>
-        <div className="track__status">
-          <audio src={answer.src}/>
-        </div>
+        <AudioPlayer src={answer.src}/>
         <div className="game__answer">
           <input className="game__input visually-hidden" type="checkbox" name="answer" value={`answer-` + index} id={`answer-` + index} onChange={this.checkboxChanged} />
           <label className="game__check" htmlFor={`answer-` + index}>{answer.genre}</label>
