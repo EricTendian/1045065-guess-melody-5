@@ -7,7 +7,8 @@ class Genre extends PureComponent {
     super(props);
 
     this.state = {
-      answers: new Array(this.props.question.answers.length).fill(false)
+      answers: new Array(this.props.question.answers.length).fill(false),
+      activeAudioPlayer: null
     };
     this.checkboxChanged = this.checkboxChanged.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
@@ -39,7 +40,8 @@ class Genre extends PureComponent {
 
     const answers = this.props.question.answers.map((answer, index) =>
       <div className="track" key={index}>
-        <AudioPlayer src={answer.src}/>
+        <AudioPlayer src={answer.src} shouldPlay={this.state.activeAudioPlayer === index} index={index}
+          updatePlaying={(id) => this.setState({activeAudioPlayer: id})} />
         <div className="game__answer">
           <input className="game__input visually-hidden" type="checkbox" name="answer" value={`answer-` + index} id={`answer-` + index} onChange={this.checkboxChanged} />
           <label className="game__check" htmlFor={`answer-` + index}>{answer.genre}</label>

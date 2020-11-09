@@ -24,14 +24,7 @@ class AudioPlayer extends PureComponent {
     });
   }
 
-  onPlay(event) {
-    let audioElements = document.getElementsByTagName(`audio`);
-    for (let audioElement of audioElements) {
-      if (audioElement !== event.target) {
-        audioElement.pause();
-      }
-    }
-
+  onPlay() {
     this.setState({
       playing: true
     });
@@ -46,7 +39,19 @@ class AudioPlayer extends PureComponent {
   playPause() {
     if (!this.state.playing) {
       this.audioRef.current.play();
+      if (this.props.updatePlaying) {
+        this.props.updatePlaying(this.props.index);
+      }
     } else {
+      this.audioRef.current.pause();
+      if (this.props.updatePlaying) {
+        this.props.updatePlaying(null);
+      }
+    }
+  }
+
+  componentDidUpdate() {
+    if (this.props.updatePlaying && !this.props.shouldPlay && this.state.playing) {
       this.audioRef.current.pause();
     }
   }
@@ -62,7 +67,10 @@ class AudioPlayer extends PureComponent {
 }
 
 AudioPlayer.propTypes = {
-  src: PropTypes.string.isRequired
+  src: PropTypes.string.isRequired,
+  shouldPlay: PropTypes.bool,
+  updatePlaying: PropTypes.func,
+  index: PropTypes.number
 };
 
 export default AudioPlayer;
