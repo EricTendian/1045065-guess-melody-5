@@ -1,5 +1,6 @@
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
+import AudioPlayer from "./audio-player";
 
 class Artist extends PureComponent {
   constructor(props) {
@@ -52,10 +53,7 @@ class Artist extends PureComponent {
         <h2 className="game__title">Кто исполняет эту песню?</h2>
         <div className="game__track">
           <div className="track">
-            <button className="track__button track__button--play" type="button"/>
-            <div className="track__status">
-              <audio src={this.props.question.song.src}/>
-            </div>
+            <AudioPlayer src={this.props.question.song.src}/>
           </div>
         </div>
 
